@@ -3,7 +3,7 @@ driver_config:
   aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
   instance_type: <%= ENV['EC2_FLAVOR_ID'] %>
   availability_zone: <%= ENV['AWS_AVAILABILITY_ZONE'] %>
-  retryable_tries: 120
+  retryable_tries: 300
 
 provisioner:
   name: chef_zero
