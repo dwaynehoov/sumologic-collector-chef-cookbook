@@ -1,7 +1,14 @@
 require 'serverspec'
+require 'pathname'
 
-set :backend, :exec
-set :path, '/sbin:/usr/local/sbin:/usr/sbin:$PATH'
+if ENV['OS'] == 'Windows_NT'
+  set :backend, :cmd
+  # On Windows, set the target host's OS explicitely
+  set :os, :family => 'windows'
+else
+  set :backend, :exec
+  set :path, '/sbin:/usr/local/sbin:/usr/sbin:$PATH'
+end
 
 def load_properties(properties_filename)
   properties = {}

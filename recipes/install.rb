@@ -56,4 +56,17 @@ when 'ubuntu', 'debian'
     source "/tmp/sumocollector_19.127-3_amd64.deb"
     action :install
   end
+when 'windows'
+  remote_file "#{node['sumologic']['installDir']}/#{node['sumologic']['installerName']}" do
+    source node['sumologic']['downloadURL']
+    notifies :run, 'execute[run-installer]'
+  end
+
+  Chef::Log.info "  Installing Sumo Logic director at #{node['sumologic']['installDir']}"
+
+  execute "run-installer" do
+    command node['sumologic']['installerCmd']
+    cwd node['sumologic']['installDir']
+    action :nothing
+  end
 end
