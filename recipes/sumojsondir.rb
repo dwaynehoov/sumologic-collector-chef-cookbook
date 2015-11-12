@@ -38,17 +38,17 @@ directory node['sumologic']['sumo_json_path'] do
 end
 
 # add local json files here
-if !platform?('windows')
-  template "#{node['sumologic']['sumo_json_path']}/localfile-system.json" do
-    cookbook node['sumologic']['json_config_cookbook']
-    source "localfile-system-dir.json.erb"
-  end
-
-  template "#{node['sumologic']['sumo_json_path']}/localfile-security.json" do
-    cookbook node['sumologic']['json_config_cookbook']
-    source "localfile-security-dir.json.erb"
-  end
-
+# if !platform?('windows')
+#   template "#{node['sumologic']['sumo_json_path']}/localfile-system.json" do
+#     cookbook node['sumologic']['json_config_cookbook']
+#     source "localfile-system-dir.json.erb"
+#   end
+#
+#   template "#{node['sumologic']['sumo_json_path']}/localfile-security.json" do
+#     cookbook node['sumologic']['json_config_cookbook']
+#     source "localfile-security-dir.json.erb"
+#   end
+#
 # This is an example of another local file source, note the use of variables in this template
 # template "#{node['sumologic']['sumo_json_path']}/localfile-generic.json" do
 #  cookbook node['sumologic']['json_config_cookbook']
@@ -66,9 +66,9 @@ if !platform?('windows')
 #  cookbook node['sumologic']['json_config_cookbook']
 #  source "syslog-dir.json.erb"
 # end
-elsif platform?('windows')
-  template "#{node['sumologic']['sumo_json_path']}/sumo-windows.json" do
-    cookbook node['sumologic']['json_config_cookbook']
-    source "sumo-windows-dir.json.erb"
-  end
-end
+# elsif platform?('windows')
+#   template "#{node['sumologic']['sumo_json_path']}/sumo-windows.json" do
+#     cookbook node['sumologic']['json_config_cookbook']
+#     source "sumo-windows-dir.json.erb"
+#   end
+# end

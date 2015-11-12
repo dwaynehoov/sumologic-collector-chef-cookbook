@@ -12,9 +12,10 @@ platforms:
   - name: debian-7.0
     driver:
       name: ec2
-      image_id: ami-c0b9a085
+      image_id: ami-e0efab88
       instance_type: m3.medium
     transport:
+      username: admin
       ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
   - name: ubuntu-12.04
     driver:
@@ -70,6 +71,14 @@ suites:
    run_list:
      - recipe[data-bag-faker]
      - recipe[sumologic-collector::default]
+   attributes:
+     SUMO_ACCESS_ID: <%= ENV['SUMO_ACCESS_ID'] %>
+     SUMO_ACCESS_KEY: <%= ENV['SUMO_ACCESS_KEY'] %>
+ - name: sumologic-source
+   data_bags_path: test/integration/data_bags
+   run_list:
+     - recipe[data-bag-faker]
+     - recipe[sumologic-source-test]
    attributes:
      SUMO_ACCESS_ID: <%= ENV['SUMO_ACCESS_ID'] %>
      SUMO_ACCESS_KEY: <%= ENV['SUMO_ACCESS_KEY'] %>
